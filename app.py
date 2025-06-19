@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
 # Load your cleaned diabetes dataset
 df = pd.read_csv("diabetes_clean.csv")
