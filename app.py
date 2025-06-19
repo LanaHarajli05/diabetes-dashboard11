@@ -21,11 +21,11 @@ filtered_df = df[
 st.title("🩺 Diabetes Analytics Dashboard")
 st.markdown("Analyze diabetes trends by demographic and health factors.")
 
-# ----------------- Chart 1 -------------------
-st.subheader("Diabetes Prevalence by Age Group")
+# Chart 1: Diabetes Prevalence by Age Group
 age_group_chart = filtered_df.groupby("age_group")["diabetes"].mean().reset_index()
 fig1 = px.bar(age_group_chart, x="age_group", y="diabetes",
-              labels={"diabetes": "Diabetes Rate", "age_group": "Age Group"})
+              labels={"diabetes": "Diabetes Rate", "age_group": "Age Group"},
+              title="Diabetes Prevalence by Age Group")
 st.plotly_chart(fig1, use_container_width=True)
 
 # ----------------- Chart 2 -------------------
