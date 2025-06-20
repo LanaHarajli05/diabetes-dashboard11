@@ -140,14 +140,18 @@ st.markdown("---")
 st.markdown("*“Never be ashamed of being diabetic. It’s not a weakness; it’s a story of strength and resilience.”*")
 st.markdown("*Developed by Lana Harajli*")
 
-st.markdown("""
-<style>
-.block-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-</style>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 git add app.py
 git commit -m "Force Streamlit rebuild"
