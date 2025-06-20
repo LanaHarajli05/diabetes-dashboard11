@@ -47,7 +47,7 @@ with col2:
     gender_chart = filtered_df.groupby("gender")["diabetes"].mean().reset_index()
     fig2 = px.bar(gender_chart, x="gender", y="diabetes")
     st.plotly_chart(fig2, use_container_width=True)
-    st.markdown("The piechart shows us the distribution of Diabetes among gender, we can notice that the % of Male with Diabetes is higher than % of female with diabetes.")
+    st.markdown("""The piechart shows us the distribution of Diabetes among gender, we can notice that the % of Male with Diabetes is higher than % of female with diabetes.""")
 
 # Row 2
 col3, col4 = st.columns(2)
@@ -104,8 +104,7 @@ st.subheader("Diabetes Rate by Gender and Age Group")
 heatmap_data = filtered_df.groupby(["gender", "age_group"])["diabetes"].mean().reset_index()
 fig8 = px.density_heatmap(heatmap_data, x="gender", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig8, use_container_width=True)
-st.markdown("""The heatmap reveals a strong age related trend in diabetes prevalence,with older adults 65+ Female=0.18 and Male=0.22 
-they tend to have a significant high diabetes rates.""")
+st.markdown("""The heatmap reveals a strong age related trend in diabetes prevalence,with older adults 65+ Female=0.18 and Male=0.22 they tend to have a significant high diabetes rates.""")
 
 # Row 7: Correlation Matrix
 st.markdown("---")
@@ -114,8 +113,7 @@ numeric_cols = ["HbA1c_level", "blood_glucose_level", "bmi", "age"]
 corr_matrix = filtered_df[numeric_cols].corr()
 fig9 = px.imshow(corr_matrix, text_auto=True, color_continuous_scale="Blues")
 st.plotly_chart(fig9, use_container_width=True)
-st.markdown("""The correlation matrix shows that age and BMI have the strongest relationship(r=0.337),followed by a modest correlation between glucose and HbA1c (r=0.1668).
-However, other factors like BMI and glucose,HbA1c show very weak correlation.This suggests the need for multifactorial tests rather than relying on a single indicator like weight.""")
+st.markdown("""The correlation matrix shows that age and BMI have the strongest relationship(r=0.337),followed by a modest correlation between glucose and HbA1c (r=0.1668).However, other factors like BMI and glucose,HbA1c show very weak correlation.This suggests the need for multifactorial tests rather than relying on a single indicator like weight.""")
 
 # Row 8: Age Group & Smoking History Heatmap
 st.markdown("---")
@@ -123,9 +121,7 @@ st.subheader("Diabetes Rate by Age Group and Smoking History")
 heatmap_df = filtered_df.groupby(["age_group", "smoking_history"])["diabetes"].mean().reset_index()
 fig10 = px.density_heatmap(heatmap_df, x="smoking_history", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig10, use_container_width=True)
-st.markdown("""The heatmap shows a compounded effect of age and smoking on diabetes prevalence.Older individuals espeically those aged 65+ reveal significantly higher diabetes rates,
-with current and former smokers at highest risk.Even in the middle age(50-65),smoking history is clearly associated with increased diabetes prevalence.
-These results show us the dual importance of age and smoking history on diabetes""")
+st.markdown("""The heatmap shows a compounded effect of age and smoking on diabetes prevalence.Older individuals espeically those aged 65+ reveal significantly higher diabetes rates,with current and former smokers at highest risk.Even in the middle age(50-65),smoking history is clearly associated with increased diabetes prevalence.These results show us the dual importance of age and smoking history on diabetes""")
 
 # Optional: reduce padding
 st.markdown("""
