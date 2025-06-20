@@ -5,6 +5,9 @@ import numpy as np  # Required for comorbidity logic
 
 # Page configuration
 st.set_page_config(page_title="Exploring Diabetes Risk Across Demographics and Clinical Indicators", layout="wide")
+# Banner image at the top
+st.image("https://i.pinimg.com/originals/63/ba/84/63ba843bb6d2ac95d307ab4a5188ab88.jpg", use_column_width=True)
+
 
 # Load data
 df = pd.read_csv("diabetes_clean.csv")
@@ -40,13 +43,15 @@ with col1:
     age_group_chart = filtered_df.groupby("age_group")["diabetes"].mean().reset_index()
     fig1 = px.bar(age_group_chart, x="age_group", y="diabetes")
     st.plotly_chart(fig1, use_container_width=True)
+    with st.expander("Interpretation"):
     st.markdown("""We can notice that diabetes prevalence increases with age, especially for age groups 50–65 and 65+. This highlights the elderly as a high-risk group that needs targeted interventions.""")
 
 with col2:
     st.subheader("Diabetes Rates by Gender")
     gender_chart = filtered_df.groupby("gender")["diabetes"].mean().reset_index()
     fig2 = px.bar(gender_chart, x="gender", y="diabetes")
-    st.plotly_chart(fig2, use_container_width=True)
+    st.pie_chart(fig2, use_container_width=True)
+    with st.expander("Interpretation"):
     st.markdown("""The piechart shows us the distribution of Diabetes among gender, we can notice that the % of Male with Diabetes is higher than % of female with diabetes.""")
 
 # Row 2
@@ -56,12 +61,14 @@ with col3:
     smoke_chart = filtered_df.groupby("smoking_history")["diabetes"].mean().reset_index()
     fig3 = px.bar(smoke_chart, x="smoking_history", y="diabetes")
     st.plotly_chart(fig3, use_container_width=True)
+    with st.expander("Interpretation"):
     st.markdown("""Current and former smokers show higher rates of diabetes compared to never-smokers, supporting the evidence that smoking is a modifiable risk factor for diabetes.""")
 
 with col4:
     st.subheader("HbA1c Levels by Diabetes Status")
     fig4 = px.box(filtered_df, x="diabetes", y="HbA1c_level")
     st.plotly_chart(fig4, use_container_width=True)
+    with st.expander("Interpretation"):
     st.markdown("""The boxplot shows a clear separation in HbA1c levels between diabetic and non-diabetic individuals. Diabetic patients tend to have higher and more variable HbA1c values, supporting the use of HbA1c as a reliable marker for diabetes diagnosis.""")
 
 # Row 3: Comorbidity chart
@@ -80,6 +87,7 @@ filtered_df["comorbidity"] = np.select(conditions, choices, default="None")
 comorb_chart = filtered_df.groupby("comorbidity")["diabetes"].mean().reset_index()
 fig5 = px.bar(comorb_chart, x="comorbidity", y="diabetes")
 st.plotly_chart(fig5, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The diabetes rate is significantly higher among individuals with hypertension and heart disease. Those who have both comorbidities show the highest prevalence of diabetes highlighting a strong link between cardiovascular comorbidities and diabetes risk.")
 
 # Row 4: BMI violin
@@ -87,6 +95,7 @@ st.markdown("---")
 st.subheader("BMI Distribution by Diabetes Status")
 fig6 = px.violin(filtered_df, x="diabetes", y="bmi", box=True, points="outliers")
 st.plotly_chart(fig6, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The violin plot shows that individuals with diabetes tend to have a higher and more spread-out BMI distribution, reinforcing that excess body weight is a significant risk
 factor for developing diabetes.""")
 
@@ -95,6 +104,7 @@ st.markdown("---")
 st.subheader("Blood Glucose Level by Diabetes Status")
 fig7 = px.box(filtered_df, x="diabetes", y="blood_glucose_level")
 st.plotly_chart(fig7, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The boxplot clearly shows that individuals with diabetes tend to have higher and more variable blood glucose levels.This supports the clinical definition of diabetes as
 a condition characterized by elevated blood sugar.""")
 
@@ -104,6 +114,7 @@ st.subheader("Diabetes Rate by Gender and Age Group")
 heatmap_data = filtered_df.groupby(["gender", "age_group"])["diabetes"].mean().reset_index()
 fig8 = px.density_heatmap(heatmap_data, x="gender", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig8, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The heatmap reveals a strong age related trend in diabetes prevalence,with older adults 65+ Female=0.18 and Male=0.22 they tend to have a significant high diabetes rates.""")
 
 # Row 7: Correlation Matrix
@@ -113,6 +124,7 @@ numeric_cols = ["HbA1c_level", "blood_glucose_level", "bmi", "age"]
 corr_matrix = filtered_df[numeric_cols].corr()
 fig9 = px.imshow(corr_matrix, text_auto=True, color_continuous_scale="Blues")
 st.plotly_chart(fig9, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The correlation matrix shows that age and BMI have the strongest relationship(r=0.337),followed by a modest correlation between glucose and HbA1c (r=0.1668).However, other factors like BMI and glucose,HbA1c show very weak correlation.This suggests the need for multifactorial tests rather than relying on a single indicator like weight.""")
 
 # Row 8: Age Group & Smoking History Heatmap
@@ -122,6 +134,9 @@ heatmap_df = filtered_df.groupby(["age_group", "smoking_history"])["diabetes"].m
 fig10 = px.density_heatmap(heatmap_df, x="smoking_history", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig10, use_container_width=True)
 st.markdown("""The heatmap shows a compounded effect of age and smoking on diabetes prevalence.Older individuals espeically those aged 65+ reveal significantly higher diabetes rates,with current and former smokers at highest risk.Even in the middle age(50-65),smoking history is clearly associated with increased diabetes prevalence.These results show us the dual importance of age and smoking history on diabetes""")
+st.markdown("---")
+st.markdown("*“Never be ashamed of being diabetic. It’s not a weakness; it’s a story of strength and resilience.”*")
+st.markdown("*Developed by Lana Harajli*")
 
 # Optional: reduce padding
 st.markdown("""
