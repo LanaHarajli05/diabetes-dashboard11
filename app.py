@@ -1,3 +1,4 @@
+st.markdown("**Last updated: June 20, 2025**")
 import streamlit as st
 import pandas as pd
 import plotly.express as px
