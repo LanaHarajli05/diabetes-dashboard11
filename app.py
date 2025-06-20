@@ -134,20 +134,21 @@ st.subheader("Diabetes Rate by Age Group and Smoking History")
 heatmap_df = filtered_df.groupby(["age_group", "smoking_history"])["diabetes"].mean().reset_index()
 fig10 = px.density_heatmap(heatmap_df, x="smoking_history", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig10, use_container_width=True)
+with st.expander("Interpretation"):
 st.markdown("""The heatmap shows a compounded effect of age and smoking on diabetes prevalence.Older individuals espeically those aged 65+ reveal significantly higher diabetes rates,with current and former smokers at highest risk.Even in the middle age(50-65),smoking history is clearly associated with increased diabetes prevalence.These results show us the dual importance of age and smoking history on diabetes""")
 st.markdown("---")
 st.markdown("*“Never be ashamed of being diabetic. It’s not a weakness; it’s a story of strength and resilience.”*")
 st.markdown("*Developed by Lana Harajli*")
 
-# Optional: reduce padding
 st.markdown("""
-    <style>
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    </style>
+<style>
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+</style>
 """, unsafe_allow_html=True)
+
 git add app.py
 git commit -m "Force Streamlit rebuild"
 git push
