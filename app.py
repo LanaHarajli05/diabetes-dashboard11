@@ -86,21 +86,21 @@ comorb_chart = filtered_df.groupby("comorbidity")["diabetes"].mean().reset_index
 fig5 = px.bar(comorb_chart, x="comorbidity", y="diabetes")
 st.plotly_chart(fig5, use_container_width=True)
 st.markdown("Fig5: Diabetes Rate by Comorbidity Type")
-st.markdown("The diabetes rate is significantly higher among individuals with hypertension and heart disease. Those who have both comorbidities show the highest prevalence of diabetes.")
+st.markdown("The diabetes rate is significantly higher among individuals with hypertension and heart disease. Those who have both comorbidities show the highest prevalence of diabetes highlighting a strong link between cardiovascular comorbidities and diabetes risk.")
 
 # Row 4: BMI violin
 st.markdown("---")
 st.subheader("BMI Distribution by Diabetes Status")
 fig6 = px.violin(filtered_df, x="diabetes", y="bmi", box=True, points="outliers")
 st.plotly_chart(fig6, use_container_width=True)
-st.markdown("The violin plot shows that individuals with diabetes tend to have a higher and more spread-out BMI distribution, reinforcing that excess body weight is a significant risk factor.")
+st.markdown("The violin plot shows that individuals with diabetes tend to have a higher and more spread-out BMI distribution, reinforcing that excess body weight is a significant risk factor for developing diabetes.")
 
 # Row 5: Blood glucose
 st.markdown("---")
 st.subheader("Blood Glucose Level by Diabetes Status")
 fig7 = px.box(filtered_df, x="diabetes", y="blood_glucose_level")
 st.plotly_chart(fig7, use_container_width=True)
-st.markdown("Individuals with diabetes tend to have higher and more variable blood glucose levels.")
+st.markdown("The boxplot clearly shows that individuals with diabetes tend to have higher and more variable blood glucose levels.This supports the clinical definition of diabetes as a condition characterized by elevated blood sugar..")
 
 # Row 6: Heatmap by Gender and Age Group
 st.markdown("---")
@@ -108,7 +108,7 @@ st.subheader("Diabetes Rate by Gender and Age Group")
 heatmap_data = filtered_df.groupby(["gender", "age_group"])["diabetes"].mean().reset_index()
 fig8 = px.density_heatmap(heatmap_data, x="gender", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig8, use_container_width=True)
-st.markdown("Older adults, especially those 65+, show the highest diabetes rates, with males being more affected.")
+st.markdown("The heatmap reveals a strong age related trend in diabetes prevalence,with older adults 65+ Female=0.18 and Male=0.22 they tend to have a significant high diabetes rates.")
 
 # Row 7: Correlation Matrix
 st.markdown("---")
@@ -117,7 +117,7 @@ numeric_cols = ["HbA1c_level", "blood_glucose_level", "bmi", "age"]
 corr_matrix = filtered_df[numeric_cols].corr()
 fig9 = px.imshow(corr_matrix, text_auto=True, color_continuous_scale="Blues")
 st.plotly_chart(fig9, use_container_width=True)
-st.markdown("BMI and age show a stronger relationship, while other correlations are relatively low, suggesting multifactorial testing is necessary.")
+st.markdown("The correlation matrix shows that age and BMI have the strongest relationship(r=0.337),followed by a modest correlation between glucose and HbA1c (r=0.1668).However, we other factors like BMI and glucose,HbA1c show very weak correlation.This suggests the need for multifactorial tests rather than relying on a single indicator like weight.")
 
 # Row 8: Age Group & Smoking History Heatmap
 st.markdown("---")
@@ -125,7 +125,7 @@ st.subheader("Diabetes Rate by Age Group and Smoking History")
 heatmap_df = filtered_df.groupby(["age_group", "smoking_history"])["diabetes"].mean().reset_index()
 fig10 = px.density_heatmap(heatmap_df, x="smoking_history", y="age_group", z="diabetes", color_continuous_scale="Reds")
 st.plotly_chart(fig10, use_container_width=True)
-st.markdown("The heatmap shows a compounded effect of age and smoking history on diabetes prevalence.")
+st.markdown("The heatmap shows a compounded effect of age and smoking on diabetes prevalence.Older individuals espeically those aged 65+ reveal significantly higher diabetes rates,with current and former smokers at highest risk.Even in the middle age(50-65),smoking history is clearly associated with increased diabetes prevalence.These results show us the dual importance of age and smoking history on diabetes.")
 
 # Optional: reduce padding
 st.markdown("""
