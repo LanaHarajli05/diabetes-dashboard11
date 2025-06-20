@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np  # Required for comorbidity logic
+st.markdown("<!-- force update -->")
 
 # Page configuration
 st.set_page_config(page_title="Exploring Diabetes Risk Across Demographics and Clinical Indicators", layout="wide")
@@ -147,3 +148,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+git add app.py
+git commit -m "Force Streamlit rebuild"
+git push
+
