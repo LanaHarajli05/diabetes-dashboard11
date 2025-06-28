@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import numpy as np  # Required for comorbidity logic
+import numpy as np
 
 # Page configuration
 st.set_page_config(page_title="Exploring Diabetes Risk Across Demographics and Clinical Indicators", layout="wide")
@@ -36,7 +36,7 @@ with st.expander("Project Overview"):
     Leveraging interactive visual analytics, this dashboard explores the prevalence and distribution of diabetes across these variables. The goal is to help healthcare stakeholders identify risk factors, guide preventive strategies, and enable data-informed decisions to improve chronic disease management and population health outcomes.
     """)
 
-# Define figures
+# Define figures before use
 age_group_chart = filtered_df.groupby("age_group")["diabetes"].mean().reset_index()
 fig1 = px.bar(age_group_chart, x="age_group", y="diabetes", height=300)
 
@@ -59,7 +59,6 @@ comorb_chart = filtered_df.groupby("comorbidity")["diabetes"].mean().reset_index
 fig5 = px.bar(comorb_chart, x="comorbidity", y="diabetes", height=300)
 
 fig6 = px.violin(filtered_df, x="diabetes", y="bmi", box=True, points="outliers", height=300)
-
 fig7 = px.box(filtered_df, x="diabetes", y="blood_glucose_level", height=300)
 
 heatmap_data = filtered_df.groupby(["gender", "age_group"])["diabetes"].mean().reset_index()
@@ -139,10 +138,10 @@ with tab4:
 
 # Footer
 st.markdown("---")
-st.markdown("*“Never be ashamed of being diabetic. It’s not a weakness; it’s a story of strength and resilience.”*")
+st.markdown("*\u201cNever be ashamed of being diabetic. It\u2019s not a weakness; it\u2019s a story of strength and resilience.\u201d*")
 st.markdown("*Developed by Lana Harajli*")
 
-# Optional: reduce padding
+# Reduce padding
 st.markdown("""
     <style>
     .block-container {
